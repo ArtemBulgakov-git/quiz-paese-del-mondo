@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Classifica</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Chi vuol essere geografo?</h1>
+      <p>Metti alla prova la tua conoscenza!</p>
+    </header>
+     <nav>
+      <a th:href="@{/}">Home</a>
+      <a th:href="@{/training}">Training</a>
+      <div class="dropdown">
+        <a href="#" class="dropdown-toggle">Quiz</a>
+        <div class="dropdown-content">
+          <a th:href="@{/start?tipo=Quiz}">Capitali</a>
+          <a th:href="@{/start?tipo=Bandiere}">Bandiere</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <a href="#" class="dropdown-toggle">Classifica</a>
+        <div class="dropdown-content">
+          <a th:href="@{/leaderboard}">Capitali</a>
+          <a th:href="@{/leaderboard_bandiera}">Bandiere</a>
+        </div>
+      </div>
+      <a th:href="@{/credits}">Credits</a>
+    </nav>
+    <div class="leaderboard-table">
+      <div class="table-header">
+        <div class="rank-col">Pos.</div>
+        <div class="player-col">Giocatore</div>
+        <div class="score-col">Punteggio</div>
+        <div class="difficulty-col">Difficoltà</div>
+      </div>
+
+      <div
+        th:each="result, iterStat : ${leaderboard}"
+        class="table-row"
+        th:attr="data-difficulty=${result.difficulty}"
+      >
+        <div class="rank-col">
+          <span th:if="${iterStat.index == 0}" class="rank-badge gold">🥇</span>
+          <span th:if="${iterStat.index == 1}" class="rank-badge silver"
+            >🥈</span
+          >
+          <span th:if="${iterStat.index == 2}" class="rank-badge bronze"
+            >🥉</span
+          >
+          <span
+            th:if="${iterStat.index > 2}"
+            class="rank-number"
+            th:text="${iterStat.index + 1}"
+          ></span>
+        </div>
+
+        <div class="player-col">
+          <span class="player-name" th:text="${result.userName}"
+            >Giocatore</span
+          >
+        </div>
+
+        <div class="score-col">
+          <span class="score-value" th:text="${result.score}">0</span>
+          <span class="score-label">punti</span>
+        </div>
+
+        <div class="difficulty-col">
+          <span
+            class="difficulty-badge"
+            th:classappend="${result.difficulty}"
+            th:text="${result.difficulty}"
+            >facile</span
+          >
+        </div>
+      </div>
+
+      <div th:if="${#lists.isEmpty(leaderboard)}" class="no-results">
+        <p>Nessun risultato trovato. Sii il primo a giocare!</p>
+        <a th:href="@{/}" class="cta-button">Gioca Ora</a>
+      </div>
+    </div>
+    <footer></footer>
+  </body>
+</html>

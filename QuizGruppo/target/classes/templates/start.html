@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starting your quiz</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+     <nav>
+      <a th:href="@{/}">Home</a>
+      <a th:href="@{/training}">Training</a>
+      <div class="dropdown">
+        <a href="#" class="dropdown-toggle">Quiz</a>
+        <div class="dropdown-content">
+          <a th:href="@{/start?tipo=Quiz}">Capitali</a>
+          <a th:href="@{/start?tipo=Bandiere}">Bandiere</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <a href="#" class="dropdown-toggle">Classifica</a>
+        <div class="dropdown-content">
+          <a th:href="@{/leaderboard}">Capitali</a>
+          <a th:href="@{/leaderboard_bandiera}">Bandiere</a>
+        </div>
+      </div>
+      <a th:href="@{/credits}">Credits</a>
+    </nav>
+    <div class="content">
+    <form th:action="@{/start}" method="post" th:object="${player}" class="quiz-form">
+        <label>Scegli il tuo username: </label><br>
+        <input type="text" th:field="*{username}" required/><br>
+        <br><label>Scegli la difficoltà:</label>
+        <select th:field="*{difficulty}"><br>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+        </select><br><br>
+        <input type="hidden" name="tipo" th:value="${tipo}">
+        <button type="submit">Start</button>
+    </form>
+    </div>
+</body>
+</html>

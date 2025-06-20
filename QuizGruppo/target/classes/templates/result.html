@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Quiz Result</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+     <nav>
+      <a th:href="@{/}">Home</a>
+      <a th:href="@{/training}">Training</a>
+      <div class="dropdown">
+        <a href="#" class="dropdown-toggle">Quiz</a>
+        <div class="dropdown-content">
+          <a th:href="@{/start?tipo=Quiz}">Capitali</a>
+          <a th:href="@{/start?tipo=Bandiere}">Bandiere</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <a href="#" class="dropdown-toggle">Classifica</a>
+        <div class="dropdown-content">
+          <a th:href="@{/leaderboard}">Capitali</a>
+          <a th:href="@{/leaderboard_bandiera}">Bandiere</a>
+        </div>
+      </div>
+      <a th:href="@{/credits}">Credits</a>
+    </nav>
+    <div class="content">
+    <div class="thanks-section">
+        <h2>🎉 Quiz Completato! 🎉</h2>
+        <p>Congratulazioni, <span class="username-highlight" th:text="${game.userName}"></span>!</p>
+        <p>Il tuo punteggio finale è: <span class="score-highlight" th:text="${game.score}"></span> su 10.</p>
+        <p>Grazie per aver giocato al nostro quiz! Speriamo sia stato divertente e che abbia imparato qualcosa di nuovo.</p>
+        <a th:href="@{/}" class="play-again-btn"> Gioca di nuovo</a>
+    </div>
+</div>
+</body>
+</html>
